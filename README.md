@@ -1,6 +1,6 @@
 # Datasets used in the CVGKAN load-forecasting study
 
-This repository documents the five electricity-demand datasets described in the manuscript **“CVGKAN: A Hybrid Short-Term Load Forecasting Framework Based on Cascaded Signal Decomposition and GRU-KAN.”** It provides two study files and links to the original providers of the other datasets. No trained model or experiment code is included in this version. The descriptions reflect the manuscript's selected series and time spans, not necessarily the full source datasets.
+This repository lists the datasets used in **“CVGKAN: A Hybrid Short-Term Load Forecasting Framework Based on Cascaded Signal Decomposition and GRU-KAN.”** The EECM-2016 Area 1 and BDG2 study files are in `data/`; source links for all five datasets are given below.
 
 ## Included study files
 
@@ -31,21 +31,21 @@ This repository documents the five electricity-demand datasets described in the 
 - Target: regional electricity load.
 - Inputs: daily mean temperature, relative humidity, and precipitation.
 - The source sequence contains 70,176 observations at 15-minute intervals. The manuscript averages each consecutive group of four observations to form 17,544 hourly samples and replaces 96 missing precipitation records with 0 mm before hourly aggregation.
-- Competition source: [2016 Problem A, “电力系统短期负荷预测” (organizer page)](https://shumo.neepu.edu.cn/info/1121/1569.htm). The organizer page provides the A-problem archive; the workbook shared here is the authors’ study copy.
+- Competition source: [2016 Problem A, “电力系统短期负荷预测” (organizer page)](https://shumo.neepu.edu.cn/info/1121/1569.htm). The workbook in this repository is the study copy.
 
 ### ISO-NE 2014
 
 - Target: hourly New England system demand.
 - Inputs: dry-bulb temperature and calendar variables (month, day, weekday, and hour).
 - The selected 2014 period contains 8,760 hourly observations.
-- Source: [ISO New England, Energy, Load, and Demand Reports](https://www.iso-ne.com/isoexpress/web/reports/load-and-demand). The exact historical report/export used should be recorded alongside any released processed file.
+- Source: [ISO New England, Energy, Load, and Demand Reports](https://www.iso-ne.com/isoexpress/web/reports/load-and-demand).
 
 ### Australian system load
 
 - Target: system load.
 - Inputs: dry-bulb, dew-point, and wet-bulb temperatures; relative humidity; electricity price; and calendar variables.
 - The source file contains 70,128 half-hourly observations. Consecutive pairs are averaged to produce 35,064 hourly samples.
-- Source citation: Liu, R. *Austrial-load.xlsx*, Figshare, version 2, 2021. DOI: [10.6084/m9.figshare.14958054.v2](https://doi.org/10.6084/m9.figshare.14958054.v2). The source file's published spelling is retained in this citation.
+- Source: Liu, R. *Austrial-load.xlsx* (filename as published), Figshare, version 2, 2021. DOI: [10.6084/m9.figshare.14958054.v2](https://doi.org/10.6084/m9.figshare.14958054.v2).
 
 ### BDG2 building
 
@@ -55,14 +55,12 @@ This repository documents the five electricity-demand datasets described in the 
 - The two-year timeline has 17,544 hourly timestamps. The manuscript reports 39 missing electricity readings. Training-set-derived hour-of-week medians, with fallbacks, impute missing historical inputs; timestamps with originally missing targets are excluded from fitting and evaluation.
 - Original project: [Building Data Genome Project 2](https://github.com/buds-lab/building-data-genome-project-2). Dataset paper: Miller, C. et al. *Scientific Data* **7**, 368 (2020), DOI: [10.1038/s41597-020-00712-x](https://doi.org/10.1038/s41597-020-00712-x).
 
-## Evaluation protocol reported in the manuscript
+## Forecasting setup
 
 - Samples are ordered chronologically and divided into training, validation, and test segments at 50%:10%:40%.
 - Forecasting inputs use the preceding 24 hourly observations. Panama is evaluated at 1-, 12-, and 24-hour output settings; the four external datasets are evaluated one hour ahead.
 - Normalization parameters and the sample-entropy clustering centers are fitted on training data.
 
-## Availability and provenance
+## Reuse
 
-The two shared files are provided for study reproducibility. This README does **not** grant a new licence to third-party source data or claim that the authors created the underlying datasets. Consult the [BDG2 source licence](https://github.com/buds-lab/building-data-genome-project-2/blob/master/LICENSE) and original providers before reuse. A complete reproduction package should additionally include preprocessing and model code, exact split boundaries, and verified source versions for every dataset.
-
-The exact ISO-NE historical export remains to be documented before this repository can serve as a complete reproduction package.
+Check the [BDG2 source licence](https://github.com/buds-lab/building-data-genome-project-2/blob/master/LICENSE) and the original providers’ terms before reusing these files.
